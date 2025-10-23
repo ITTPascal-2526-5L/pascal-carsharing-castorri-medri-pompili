@@ -1,1 +1,2 @@
 flask
+#ci dobbiamo inserire tutte le librerie in più da inserire
