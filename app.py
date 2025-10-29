@@ -1,22 +1,14 @@
-from flask import Flask
+# Se flask non è riconosciuto, così come il venv, controlla dove sono allocati python e pip.
+# se sono nella cartella sbagliata, cioè fuori progetto, disinstalla il venv e reinstallalo bene
+# ricontrolla, se sono corrette le cartelle allora reinstalla flask.
 
-# Create an instance of Flask 
-app = Flask(__name__)
+# Questo file serve solo per lanciare l'istanza.
+# L'istanza e le sue dipendenze (librerie) sono state settate all'interno del file __init__.py all'interno del package "app".
 
-# Define a route and the function to handle it
-# "/" simboleggia la root
-@app.route('/')
-def home():
-    return "Welcome to the Car Sharing Service!"
+# Da dentro il pacchetto app prendi questa funzione
+from app import create_app
 
-@app.route('/about')
-def about():
-    return "About this page"
+app = create_app()
 
-@app.route('/user/<username>')
-def show_user_profile(username):
-    return f"User: {username}"
-
-# Run the application if this file is executed directly
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
