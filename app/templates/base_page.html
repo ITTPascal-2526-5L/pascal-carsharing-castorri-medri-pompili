@@ -36,13 +36,13 @@
                   Log In
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
-                  <li><a class="dropdown-item" href="#">Driver</a></li>
-                  <li><a class="dropdown-item" href="#">Passenger</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('registration.registration_driver') }}">Driver</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('registration.registration_passenger') }}">Passenger</a></li>
                 </ul>
               </li>
 
               <li class="nav-item dropdown ms-3">
-                <a class="nav-link dropdown-toggle text-white" href="#" id="signupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle text-white" href="" id="signupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                   Sign In
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="signupDropdown">
