@@ -19,7 +19,7 @@
 
     <link
             rel="stylesheet"
-            href='static/css/style.css'    
+            href='static/css/style_login.css'    
     />
 </head>
 
@@ -27,9 +27,12 @@
     <div class="login-box">
         <div class="card">
             <div class="card-header text-center">
-                <a href="/" class="h1"><b>Login</b> Passenger</a>
+                <a href="/" class="h1"><b>Signin</b> Passenger</a>
             </div>
             <div class="card-body">
+                <a href="{{ url_for('registration.registration_driver') }}" class="btn btn-primary">
+                    Driver
+                </a>
                 <p class="login-box-msg">
                     Inserisci le tue credenziali per accedere all'area passeggeri
                 </p>
@@ -43,10 +46,10 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post" action="">
+                <form method="post" action="/save_passenger">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" name="login" class="form-control" placeholder="Email o Username" autocomplete="username" required>
+                        <input type="text" name="username" class="form-control" placeholder="Username" autocomplete="username" required>
                     </div>
 
                     <div class="input-group mb-3">
@@ -54,15 +57,20 @@
                         <input type="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" required>
                     </div>
 
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="text" name="email" class="form-control" placeholder="Email" required>
+                    </div>
+
                     <div class="row mb-3">
                         <div class="col-4 text-end">
-                            <button type="submit" class="btn btn-primary w-100">Accedi</button>
+                            <button type="submit" class="btn btn-primary w-100">Registrati</button>
                         </div>
                     </div>
                 </form>
 
                 <div class="footer-text">
-                    <p>Non hai un account? <a href="#" style="color:#4a90e2;">Registrati</a></p>
+                    <p>Torna a home <a href="{{ url_for('main.homepage') }}" style="color:#4a90e2;">Indietro</a></p>
                 </div>
             </div>
         </div>

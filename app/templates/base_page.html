@@ -33,7 +33,7 @@
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle text-white" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Log In
+                  Sign In
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="loginDropdown">
                   <li><a class="dropdown-item" href="{{ url_for('registration.registration_driver') }}">Driver</a></li>
@@ -43,11 +43,10 @@
 
               <li class="nav-item dropdown ms-3">
                 <a class="nav-link dropdown-toggle text-white" href="" id="signupDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Sign In
+                  Login
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="signupDropdown">
-                  <li><a class="dropdown-item" href="#">Driver</a></li>
-                  <li><a class="dropdown-item" href="#">Passenger</a></li>
+                  <li><a class="dropdown-item" href="{{ url_for('login.new_login') }}">Login</a></li>
                 </ul>
               </li>
             </ul>

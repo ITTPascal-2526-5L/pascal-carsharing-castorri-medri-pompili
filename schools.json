@@ -1,0 +1,16 @@
+[
+    {
+        "name": "ITT Blaise Pascal",
+        "address": "Piazzale Macrelli, 100",
+        "city": "Cesena",
+        "province": "FC",
+        "CUP": "47521"
+    },
+    {
+        "name": "Ragioneria",
+        "address": "Via Tito Maccio Plauto, 67",
+        "city": "Cesena",
+        "province": "FC",
+        "CUP": "47521"
+    }
+]
