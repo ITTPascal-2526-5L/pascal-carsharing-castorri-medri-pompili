@@ -1,0 +1,32 @@
+body {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+}
+
+.navbar {
+    box-shadow: 0 2px 4px rgba(133, 60, 146, 0.1);
+}
+
+.carousel-item img {
+    height: 400px;
+    object-fit: cover;
+}
+
+.card {
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.carousel-caption {
+    background-color: rgba(106, 27, 154, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+    margin-top: 0; /* evita salto */
+}
