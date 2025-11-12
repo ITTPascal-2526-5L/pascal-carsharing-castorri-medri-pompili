@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request, session
+from flask import Blueprint, render_template, redirect, session
 import json
 
 user_bp = Blueprint("user", __name__)
