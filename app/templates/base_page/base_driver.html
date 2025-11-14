@@ -27,7 +27,7 @@
           <div class="collapse navbar-collapse" id="topNavbar">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link text-white" href="#">Home</a>
+                <a class="nav-link text-white" href="{{ url_for('main.homepage')}}">Home</a>
               </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
@@ -49,6 +49,7 @@
     </header>
     <main class="container-xxl my-5">
       <div id="carouselExampleCaptions" class="carousel slide mb-5" data-bs-ride="carousel">
+        <h1><strong>DRIVER</strong></h1>
         <div class="carousel-indicators">
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
           <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>

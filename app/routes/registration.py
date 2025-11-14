@@ -75,10 +75,3 @@ def save_passenger():
         json.dump(passengers, f, ensure_ascii=False, indent=4)
 
     return "Salvataggio eseguito con successo!"
-    # return redirect(/driver)
-
-# registrazione del driver, quando si clicca submit i dati si salvano in un file txt, json (consigliato) o xml
-# relativa registrazione del veicolo (magari nella pagina del driver)
-# solo dati
-# registrazione passenger 
-# registrazione scuole
