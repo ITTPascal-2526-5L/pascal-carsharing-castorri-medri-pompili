@@ -47,5 +47,12 @@
         "email": "c",
         "nrTel": "c",
         "nrPatente": "c"
+    },
+    {
+        "username": "Dede",
+        "password": "dede",
+        "email": "dede70",
+        "nrTel": "104258963",
+        "nrPatente": "465789"
     }
 ]

@@ -13,7 +13,6 @@ def check_login():
     password = request.form['password']
 
     checkin = False
-    session["username"] = username
 
     try:
         with open("drivers.json", "r", encoding="utf-8") as f:
@@ -21,6 +20,7 @@ def check_login():
 
             for driver in drivers:
                 if (driver["username"] == username or driver["email"] == username) and driver["password"] == password:
+                    session["username"] = driver["username"]
                     checkin = True
             
             if checkin:
