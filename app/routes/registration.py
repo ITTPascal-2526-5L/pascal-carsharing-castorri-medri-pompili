@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, request
+from flask import Blueprint, render_template, redirect, request, session
 import json
 
 # Per ogni endpoint metto un nome diverso che lo identifica.
@@ -40,8 +40,9 @@ def save_driver():
     with open("drivers.json", "w", encoding="utf-8") as f:
         json.dump(drivers, f, ensure_ascii=False, indent=4)
 
-    return "Salvataggio eseguito con successo!"
-    # return redirect(/driver)
+    session["username"] = username
+
+    return redirect("/user_driver")
 
 @registration_bp.route("/registration_passenger")
 def registration_passenger():
@@ -74,10 +75,3 @@ def save_passenger():
         json.dump(passengers, f, ensure_ascii=False, indent=4)
 
     return "Salvataggio eseguito con successo!"
-    # return redirect(/driver)
-
-# registrazione del driver, quando si clicca submit i dati si salvano in un file txt, json (consigliato) o xml
-# relativa registrazione del veicolo (magari nella pagina del driver)
-# solo dati
-# registrazione passenger 
-# registrazione scuole
