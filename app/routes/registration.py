@@ -27,7 +27,7 @@ def save_driver():
     }
 
     try:
-        with open("drivers.json", "r", encoding="utf-8") as f:
+        with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
             try:
                 drivers = json.load(f)
             except json.JSONDecodeError:
@@ -37,7 +37,7 @@ def save_driver():
 
     drivers.append(new_driver)
 
-    with open("drivers.json", "w", encoding="utf-8") as f:
+    with open("DataBase/drivers.json", "w", encoding="utf-8") as f:
         json.dump(drivers, f, ensure_ascii=False, indent=4)
 
     session["username"] = username
@@ -61,7 +61,7 @@ def save_passenger():
     }
 
     try:
-        with open("passengers.json", "r", encoding="utf-8") as f:
+        with open("DataBase/passengers.json", "r", encoding="utf-8") as f:
             try:
                 passengers = json.load(f)
             except json.JSONDecodeError:
@@ -71,7 +71,7 @@ def save_passenger():
 
     passengers.append(new_passenger)
 
-    with open("passengers.json", "w", encoding="utf-8") as f:
+    with open("DataBase/passengers.json", "w", encoding="utf-8") as f:
         json.dump(passengers, f, ensure_ascii=False, indent=4)
 
     return "Salvataggio eseguito con successo!"
