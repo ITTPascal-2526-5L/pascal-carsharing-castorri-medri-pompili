@@ -15,7 +15,7 @@ def check_login():
     checkin = False
 
     try:
-        with open("drivers.json", "r", encoding="utf-8") as f:
+        with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
             drivers = json.load(f)
 
             for driver in drivers:

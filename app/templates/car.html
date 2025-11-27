@@ -43,10 +43,10 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post" action="">
+                <form method="post" action="/new_vehicles">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-car"></i></span>
-                        <input type="text" name="Marca" class="form-control" placeholder="Marca veicolo" autocomplete="marca" required>
+                        <input type="text" name="marca" class="form-control" placeholder="Marca veicolo" autocomplete="marca" required>
 
                         <span class="input-group-text"><i class="fa-solid fa-car-side"></i></span>
                         <input type="text" name="modello" class="form-control" placeholder="Modello veicolo" autocomplete="modello" required>
@@ -59,7 +59,7 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-people-group"></i></span>
-                            <input type="text" class="form-control dropdown-toggle" id="capienzaInput" placeholder="Capienza" data-bs-toggle="dropdown" readonly>
+                            <input type="text" class="form-control dropdown-toggle" name="capienza" id="capienzaInput" placeholder="Capienza" data-bs-toggle="dropdown" readonly>
                             <ul class="dropdown-menu w-100" aria-labelledby="capienzaInput">
                                 <li><a class="dropdown-item" href="#">3</a></li>
                                 <li><a class="dropdown-item" href="#">4</a></li>
@@ -68,7 +68,7 @@
                             </ul>
 
                         <span class="input-group-text"><i class="fa-solid fa-bolt"></i></span>
-                        <input type="text" name="kw" class="form-control" placeholder="Potenza in kw" autocomplete="kw" required>
+                        <input type="text" name="potenza" class="form-control" placeholder="Potenza in kw" autocomplete="kw" required>
                     </div>
                     
 
@@ -80,8 +80,9 @@
                         <input type="text" name="colore" class="form-control" placeholder="Colore auto" autocomplete="modello" required>
                     </div>
 
-                    <br>
-            
+                    <br><br>
+                    
+
                     <div class="row mb-3">
                         <div class="col-4 text-end">
                             <button type="submit" class="btn btn-primary w-100">Registra</button>
