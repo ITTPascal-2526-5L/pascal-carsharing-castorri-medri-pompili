@@ -5,5 +5,19 @@
         "email": "snabl",
         "nrTel": "snabl",
         "nrPatente": "sbal"
+    },
+    {
+        "username": "q",
+        "password": "q",
+        "email": "q",
+        "nrTel": "q",
+        "nrPatente": "q"
+    },
+    {
+        "username": "a",
+        "password": "a",
+        "email": "a",
+        "nrTel": "a",
+        "nrPatente": "a"
     }
 ]
