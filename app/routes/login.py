@@ -23,10 +23,11 @@ def check_login():
                     session["username"] = driver["username"]
                     checkin = True
             
-            if checkin:
-                return redirect("/user_driver")
-            else:
-                flash("Credenziali errate", "danger")
-                return render_template("login/login.html")
-    except json.JSONDecodeError:
-        return "ERRORE!"
+        if checkin:
+            return redirect("/user_driver")
+        else:
+            flash("Credenziali errate", "danger")
+            return render_template("login/login.html")
+    except:
+        flash("Credenziali errate", "danger")
+        return render_template("login/login.html")

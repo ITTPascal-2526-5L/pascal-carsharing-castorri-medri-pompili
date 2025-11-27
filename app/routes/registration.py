@@ -27,6 +27,8 @@ def save_driver():
     }
 
     try:
+        # "r" --> sola lettura
+        # "w" --> se non esiste lo crea da zero
         with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
             try:
                 drivers = json.load(f)
