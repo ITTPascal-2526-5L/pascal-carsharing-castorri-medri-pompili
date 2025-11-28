@@ -9,12 +9,12 @@ def add_vehicles():
 
 @vehicles_bp.route("/new_vehicles", methods=["POST"])
 def new_vehicles():
-    marca = request.form['marca']
-    modello = request.form['modello']
-    targa = request.form['targa']
+    marca = request.form['marca'].capitalize()
+    modello = request.form['modello'].capitalize()
+    targa = request.form['targa'].upper()
     capienza = request.form['capienza']
     carburante = request.form['carburante']
-    colore = request.form['colore']
+    colore = request.form['colore'].capitalize()
     potenza = request.form['potenza']
     username = session["username"]
 
