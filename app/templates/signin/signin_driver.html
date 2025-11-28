@@ -46,7 +46,7 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post" action="/save_driver">
+                <form method="post" action="/save_driver" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                         <input type="text" name="username" class="form-control" placeholder="Username" required>
@@ -69,7 +69,12 @@
 
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                        <input type="text" name="nrPatente" class="form-control" placeholder="Drive license number" required>
+                        <input type="text" name="nrLicense" class="form-control" placeholder="License Number" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                        <input type="file" name="license" accept="image/*" class="form-control" placeholder="Load license" required>
                     </div>
 
                     <div class="row mb-3">
