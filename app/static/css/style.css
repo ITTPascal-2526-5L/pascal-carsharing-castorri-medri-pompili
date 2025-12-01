@@ -1,6 +1,6 @@
 body {
-    padding-top: var(--bs-navbar-padding-y);
-    padding-bottom: var(--bs-navbar-padding-y);
+    padding-top: var(--bs-navbar-padding-y, 20px);
+    padding-bottom: var(--bs-navbar-padding-y, 20px);
     background-color: white; 
   }
 
@@ -21,6 +21,11 @@ body {
   .card:hover {
     transform: translateY(calc(var(--bs-card-spacer-y) * -1));
   }
+
+  .card.no-hover:hover {
+    transform: none;
+  }
+
 
   .carousel-caption {
     background-color: rgba(106, 27, 154, 0.7);
