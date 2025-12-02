@@ -14,8 +14,10 @@ def registration_driver():
 @registration_bp.route("/save_driver", methods=["POST"])
 def save_driver():
     username = request.form['username']
-    password = request.form['password']
     email = request.form['email']
+    if email.Contains("@") == False:
+        return render_template("signin/signin_driver.html", errore="Email non valida")
+    
     nrTel = request.form['nrTel']
     nrLicense = request.form['nrLicense']
     license = request.files.get('license')
@@ -64,6 +66,12 @@ def save_passenger():
     username = request.form['username']
     password = request.form['password']
     email = request.form['email']
+
+    if "@" not in email:
+        return render_template("signin/signin_passenger.html", errore="Email non valida")
+
+    if len(password) < 8:
+        return render_template("signin/signin_passenger.html", errore="Password troppo corta, deve avere almeno 8 caratteri")
 
     new_passenger = {
         "username": username, 
