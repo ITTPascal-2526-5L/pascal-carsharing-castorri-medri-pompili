@@ -4,13 +4,15 @@
         "address": "Piazzale Macrelli, 100",
         "city": "Cesena",
         "province": "FC",
-        "CUP": "47521"
+        "CAP": "47521",
+        "ID": "FOIS01100L"
     },
     {
         "name": "Ragioneria",
         "address": "Via Tito Maccio Plauto, 67",
         "city": "Cesena",
         "province": "FC",
-        "CUP": "47521"
+        "CAP": "47521",
+        "ID": "FOTD02000L"
     }
 ]

@@ -19,5 +19,19 @@
         "email": "a",
         "nrTel": "a",
         "nrPatente": "a"
+    },
+    {
+        "username": "a",
+        "password": "a",
+        "email": "a",
+        "nrTel": "a",
+        "nrPatente": "a"
+    },
+    {
+        "username": "1",
+        "password": "1",
+        "email": "1",
+        "nrTel": "1",
+        "nrPatente": "1"
     }
 ]
