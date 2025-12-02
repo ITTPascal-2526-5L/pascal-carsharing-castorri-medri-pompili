@@ -1,0 +1,38 @@
+{% extends "tables/base_page.html" %}
+
+{% block maincontent %}
+<div class="container pt-5 d-flex justify-content-center">
+  <div class="card no-hover col-12 col-lg-10 col-xl-8">
+    <div class="card-header text-white">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <h3 class="card-title mb-0" style="color: #6a1b9a;">Passengers Details</h3>
+      </div>
+    </div>
+    <div class="card-body">
+      {% if passengers %}
+      <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for passenger in passengers %}
+          <tr>
+            <td>{{ passenger.username }}</td>
+            <td>{{ passenger.email }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <div class="alert alert-warning text-center">{{ message }}</div>
+      {% endif %}
+      <div class="text-end mt-3">
+        <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock maincontent %}

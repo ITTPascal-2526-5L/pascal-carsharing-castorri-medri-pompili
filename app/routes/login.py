@@ -15,7 +15,7 @@ def check_login():
     checkin = False
 
     try:
-        with open("drivers.json", "r", encoding="utf-8") as f:
+        with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
             drivers = json.load(f)
 
             for driver in drivers:
@@ -23,10 +23,11 @@ def check_login():
                     session["username"] = driver["username"]
                     checkin = True
             
-            if checkin:
-                return redirect("/user_driver")
-            else:
-                flash("Credenziali errate", "danger")
-                return render_template("login/login.html")
-    except json.JSONDecodeError:
-        return "ERRORE!"
+        if checkin:
+            return redirect("/user_driver")
+        else:
+            flash("Credenziali errate", "danger")
+            return render_template("login/login.html")
+    except:
+        flash("Credenziali errate", "danger")
+        return render_template("login/login.html")

@@ -43,10 +43,10 @@
                     {% endfor %}
                 {% endif %}
 
-                <form method="post" action="">
+                <form method="post" action="/new_vehicles">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fa-solid fa-car"></i></span>
-                        <input type="text" name="Marca" class="form-control" placeholder="Marca veicolo" autocomplete="marca" required>
+                        <input type="text" name="marca" class="form-control" placeholder="Marca veicolo" autocomplete="marca" required>
 
                         <span class="input-group-text"><i class="fa-solid fa-car-side"></i></span>
                         <input type="text" name="modello" class="form-control" placeholder="Modello veicolo" autocomplete="modello" required>
@@ -57,30 +57,30 @@
                         <input type="text" name="targa" class="form-control" placeholder="Targa (XX0000XX)" autocomplete="targa" required>
                     </div>
 
-                    <div class="dropdown w-25">
-                        <input type="text" class="form-control dropdown-toggle" id="capienzaInput" placeholder="Capienza" data-bs-toggle="dropdown" readonly>
-                        <ul class="dropdown-menu w-100" aria-labelledby="capienzaInput">
-                            <li><a class="dropdown-item" href="#">3</a></li>
-                            <li><a class="dropdown-item" href="#">4</a></li>
-                            <li><a class="dropdown-item" href="#">6</a></li>
-                            <li><a class="dropdown-item" href="#">8</a></li>
-                        </ul>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-people-group"></i></span>
+                            <input type="text" class="form-control dropdown-toggle" name="capienza" id="capienzaInput" placeholder="Capienza" data-bs-toggle="dropdown" readonly>
+                            <ul class="dropdown-menu w-100" aria-labelledby="capienzaInput">
+                                <li><a class="dropdown-item" href="#">3</a></li>
+                                <li><a class="dropdown-item" href="#">4</a></li>
+                                <li><a class="dropdown-item" href="#">6</a></li>
+                                <li><a class="dropdown-item" href="#">8</a></li>
+                            </ul>
+
+                        <span class="input-group-text"><i class="fa-solid fa-bolt"></i></span>
+                        <input type="text" name="potenza" class="form-control" placeholder="Potenza in kw" autocomplete="kw" required>
                     </div>
+                    
 
                     <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-car"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-gas-pump"></i></span>
                         <input type="text" name="carburante" class="form-control" placeholder="Tipo carburante" autocomplete="fuel" required>
 
-                        <span class="input-group-text"><i class="fa-solid fa-car-side"></i></span>
+                        <span class="input-group-text"><i class="fa-solid fa-palette"></i></span>
                         <input type="text" name="colore" class="form-control" placeholder="Colore auto" autocomplete="modello" required>
                     </div>
 
-                    <div class="input-group mb-3">
-                        <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
-                        <input type="text" name="kw" class="form-control" placeholder="Potenza auto in kw" autocomplete="kw" required>
-                    </div>
-
-                    <br></br>
+                    <br><br>
                     
 
                     <div class="row mb-3">
