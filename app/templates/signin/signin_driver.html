@@ -30,9 +30,6 @@
                 <a href="#" class="h1"><b>Signin</b> Driver</a>
             </div>
             <div class="card-body">
-                <a href="{{ url_for('registration.registration_passenger') }}" class="btn btn-primary">
-                    Passenger
-                </a>
                 <p class="login-box-msg">
                     Inserisci le tue credenziali per accedere all'area Driver
                 </p>
@@ -49,7 +46,7 @@
                 <form method="post" action="/save_driver" enctype="multipart/form-data">
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" name="username" class="form-control" placeholder="Username" required>
+                        <input type="text" name="username" class="form-control" placeholder="Username" required >
                     </div>
 
                     <div class="input-group mb-3">
@@ -85,6 +82,7 @@
                 </form>
 
                 <div class="footer-text">
+                    <p>Registrati come <a href="{{ url_for('registration.registration_passenger') }}" style="color:#4a90e2;">Passenger</a></p>
                     <p>Torna a home <a href="{{ url_for('main.homepage') }}" style="color:#4a90e2;">Indietro</a></p>
                 </div>
             </div>
