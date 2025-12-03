@@ -49,6 +49,9 @@
                         <input type="text" name="username" class="form-control" placeholder="Username" required >
                     </div>
 
+                     {% if errore and errore.password %}
+                        <div class="text-danger small mb-2">{{ errore.password }}</div>
+                    {% endif %}
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         <input type="password" name="password" class="form-control" placeholder="Password" required>
