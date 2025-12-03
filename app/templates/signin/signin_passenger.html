@@ -30,12 +30,23 @@
                 <a href="#" class="h1"><b>Signin</b> Passenger</a>
             </div>
             <div class="card-body">
-                <a href="{{ url_for('registration.registration_driver') }}" class="btn btn-primary">
-                    Driver
-                </a>
                 <p class="login-box-msg">
                     Inserisci le tue credenziali per accedere all'area passeggeri
                 </p>
+
+                {% if errore %}
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        {{ errore }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
+
+                {% if messaggio %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ messaggio }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endif %}
 
                 {% if messages %}
                     {% for message in messages %}
@@ -70,6 +81,7 @@
                 </form>
 
                 <div class="footer-text">
+                    <p>Registrati come <a href="{{ url_for('registration.registration_driver') }}" style="color:#4a90e2;">Driver</a></p>
                     <p>Torna a home <a href="{{ url_for('main.homepage') }}" style="color:#4a90e2;">Indietro</a></p>
                 </div>
             </div>
