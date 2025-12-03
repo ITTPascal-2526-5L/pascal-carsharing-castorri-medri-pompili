@@ -12,22 +12,24 @@ def check_login():
     username = request.form['username']
     password = request.form['password']
 
-    checkin = False
-
     try:
-        with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
-            drivers = json.load(f)
+        with open("DataBase/utenti.json", "r", encoding="utf-8") as f:
+            utenti = json.load(f)
 
-            for driver in drivers:
-                if (driver["username"] == username or driver["email"] == username) and driver["password"] == password:
-                    session["username"] = driver["username"]
-                    checkin = True
+            for utente in utenti:
+                if (utente["username"] == username or utente["email"] == username) and utente["password"] == password:
+                    session["username"] = utente["username"]
+                    session["is_driver"] = utente.get("driver", False)
+                    return redirect("/user_dashboard")
             
-        if checkin:
-            return redirect("/user_driver")
-        else:
             flash("Credenziali errate", "danger")
             return render_template("login/login.html")
-    except:
-        flash("Credenziali errate", "danger")
+    except Exception as e:
+        flash("Errore nel login", "danger")
         return render_template("login/login.html")
+
+@login_bp.route("/logout", methods=["POST"])
+def logout():
+    session.clear()
+    flash("Logout effettuato", "success")
+    return redirect("/")
