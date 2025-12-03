@@ -1,0 +1,42 @@
+body {
+    padding-top: var(--bs-navbar-padding-y, 20px);
+    padding-bottom: var(--bs-navbar-padding-y, 20px);
+    background-color: white; 
+  }
+
+  .navbar {
+    box-shadow: 0 var(--bs-navbar-padding-y) var(--bs-navbar-padding-x) rgba(133, 60, 146, 0.1);
+  }
+
+  .carousel-item img {
+    height: auto;
+    object-fit: cover;
+    min-height: 50vh;
+  }
+
+  .card {
+    transition: transform var(--bs-transition-timing) ease-in-out;
+  }
+
+  .card:hover {
+    transform: translateY(calc(var(--bs-card-spacer-y) * -1));
+  }
+
+  .card.no-hover:hover {
+    transform: none;
+  }
+
+
+  .carousel-caption {
+    background-color: rgba(106, 27, 154, 0.7);
+    padding: var(--bs-card-spacer-y);
+    border-radius: var(--bs-border-radius);
+  }
+
+
+  @media (min-width: 992px) {
+    .navbar .dropdown:hover > .dropdown-menu {
+      display: block;
+      margin-top: 0; 
+    }
+  }

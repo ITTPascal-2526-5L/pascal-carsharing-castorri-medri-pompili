@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Registrazione macchina</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <!-- Bootstrap CSS -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    />
+
+    <!-- Font Awesome for icons -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        rel="stylesheet"
+    />
+
+    <link
+            rel="stylesheet"
+            href='static/css/style_login.css'    
+    />
+</head>
+
+<body class="background_login">
+    <div class="login-box">
+        <div class="card">
+            <div class="card-header text-center">
+                <a href="/" class="h1"><b>Registrazione</b> veicolo</a>
+            </div>
+            <div class="card-body">
+                <p class="login-box-msg">
+                    Inserisci le specifiche della macchina per la registrazione del veicolo
+                </p>
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                <form method="post" action="/new_vehicles">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-car"></i></span>
+                        <input type="text" name="marca" class="form-control" placeholder="Marca veicolo" autocomplete="marca" required>
+
+                        <span class="input-group-text"><i class="fa-solid fa-car-side"></i></span>
+                        <input type="text" name="modello" class="form-control" placeholder="Modello veicolo" autocomplete="modello" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+                        <input type="text" name="targa" class="form-control" placeholder="Targa (XX0000XX)" autocomplete="targa" required>
+                    </div>
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-people-group"></i></span>
+                            <input type="text" class="form-control dropdown-toggle" name="capienza" id="capienzaInput" placeholder="Capienza" data-bs-toggle="dropdown" readonly>
+                            <ul class="dropdown-menu w-100" aria-labelledby="capienzaInput">
+                                <li><a class="dropdown-item" href="#">3</a></li>
+                                <li><a class="dropdown-item" href="#">4</a></li>
+                                <li><a class="dropdown-item" href="#">6</a></li>
+                                <li><a class="dropdown-item" href="#">8</a></li>
+                            </ul>
+
+                        <span class="input-group-text"><i class="fa-solid fa-bolt"></i></span>
+                        <input type="text" name="potenza" class="form-control" placeholder="Potenza in kw" autocomplete="kw" required>
+                    </div>
+                    
+
+                    <div class="input-group mb-3">
+                        <span class="input-group-text"><i class="fa-solid fa-gas-pump"></i></span>
+                        <input type="text" name="carburante" class="form-control" placeholder="Tipo carburante" autocomplete="fuel" required>
+
+                        <span class="input-group-text"><i class="fa-solid fa-palette"></i></span>
+                        <input type="text" name="colore" class="form-control" placeholder="Colore auto" autocomplete="modello" required>
+                    </div>
+
+                    <br><br>
+                    
+
+                    <div class="row mb-3">
+                        <div class="col-4 text-end">
+                            <button type="submit" class="btn btn-primary w-100">Registra</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const input = document.getElementById('capienzaInput');
+        const items = document.querySelectorAll('.dropdown-item');
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                input.value = item.textContent;
+            });
+        });
+  </script>
+
+</body>
+</html>
