@@ -37,20 +37,6 @@
                     Inserisci le tue credenziali per accedere all'area Driver
                 </p>
 
-                {% if errore %}
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        {{ errore }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endif %}
-
-                {% if messaggio %}
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        {{ messaggio }}
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
-                {% endif %}
-
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -66,6 +52,9 @@
                         <input type="text" name="username" class="form-control" placeholder="Username" required>
                     </div>
 
+                     {% if errore and errore.password %}
+                        <div class="text-danger small mb-2">{{ errore.password }}</div>
+                    {% endif %}
                     <div class="input-group mb-3">
                         <span class="input-group-text"><i class="fas fa-lock"></i></span>
                         <input type="password" name="password" class="form-control" placeholder="Password" required>

@@ -13,21 +13,30 @@ def registration_driver():
 @registration_bp.route("/save_driver", methods=["POST"])
 def save_driver():
     username = request.form['username']
-    email = request.form['email']
-    if email.Contains("@") == False:
-        return render_template("signin/signin_driver.html", errore="Email non valida")
-    
-    nrTel = request.form['nrTel']
-    if len(nrTel) != 10:
-        return render_template("signin/signin_driver.html", errore="Numero di telefono non valido")
-    
     password = request.form['password']
-    if len(password) < 8:
-        return render_template("signin/signin_driver.html", errore="Password troppo corta, deve avere almeno 8 caratteri")
-    
+    email = request.form['email']
+    nrTel = request.form['nrTel']
     nrPatente = request.form['nrPatente']
+
+    errori = {}
+
+    if not username:
+        errori['username'] = "Il nome utente è obbligatorio."
+    if "@" not in email or "." not in email:
+        errori['email'] = "Email non valida."
+    if not nrTel.isdigit() or len(nrTel) != 10:
+        errori['nrTel'] = "Numero di telefono non valido (deve contenere 10 cifre)."
+    if len(password) < 8:
+        errori['password'] = "Password troppo corta (minimo 8 caratteri)."
     if len(nrPatente) != 10:
-        return render_template("signin/signin_driver.html", errore="Numero di patente non valido")
+        errori['nrPatente'] = "Numero di patente non valido (deve contenere 10 caratteri)."
+
+    if errori:
+        return render_template(
+            "signin/signin_driver.html",
+            errore=errori,  
+            dati=request.form
+        )
 
     new_driver = {
         "username": username, 
@@ -65,12 +74,6 @@ def save_passenger():
     password = request.form['password']
     email = request.form['email']
 
-    if "@" not in email:
-        return render_template("signin/signin_passenger.html", errore="Email non valida")
-
-    if len(password) < 8:
-        return render_template("signin/signin_passenger.html", errore="Password troppo corta, deve avere almeno 8 caratteri")
-
     new_passenger = {
         "username": username, 
         "password": password, 
@@ -91,7 +94,7 @@ def save_passenger():
     with open("passengers.json", "w", encoding="utf-8") as f:
         json.dump(passengers, f, ensure_ascii=False, indent=4)
 
-    return render_template("signin/signin_passenger.html", messaggio="Salvataggio eseguito con successo!")
+    return "Salvataggio eseguito con successo!"
     # return redirect(/driver)
 
 # registrazione del driver, quando si clicca submit i dati si salvano in un file txt, json (consigliato) o xml
