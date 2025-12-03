@@ -20,6 +20,10 @@ def save_driver():
     nrLicense = request.form['nrLicense']
     license = request.files.get('license')
 
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "licenses")
+    os.makedirs(db_path, exist_ok=True)
+
     # salvo la patete dentro la cartella "licenses"
     # il nome del file è nel formato username_numeroPatente
     if license.content_type.startswith('image/'):
@@ -70,6 +74,10 @@ def save_passenger():
         "password": password, 
         "email": email
     }
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_path, exist_ok=True)
 
     try:
         with open("DataBase/passengers.json", "r", encoding="utf-8") as f:
