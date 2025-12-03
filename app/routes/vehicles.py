@@ -3,23 +3,33 @@ import json
 
 vehicles_bp = Blueprint("vehicles", __name__)
 
-@vehicles_bp.route("/vehicles", methods=["POST"])
+@vehicles_bp.route("/add_vehicles")
+def add_vehicles():
+    return render_template("car.html")
+
+@vehicles_bp.route("/new_vehicles", methods=["POST"])
 def new_vehicles():
-    targa = request.form['targa']
-    modello = request.form['modello']
+    marca = request.form['marca'].capitalize()
+    modello = request.form['modello'].capitalize()
+    targa = request.form['targa'].upper()
     capienza = request.form['capienza']
-    anno = request.form['anno']
+    carburante = request.form['carburante']
+    colore = request.form['colore'].capitalize()
+    potenza = request.form['potenza']
     username = session["username"]
 
     new_vehicle = {
-        "targa": targa, 
+        "marca": marca, 
         "modello": modello, 
-        "capienza": capienza, 
-        "anno": anno,
+        "targa": targa,
+        "capienza": capienza,
+        "carburante": carburante,
+        "colore": colore,
+        "potenza": potenza
     }
 
     try:
-        with open("vehicles.json", "r", encoding="utf-8") as f:
+        with open("DataBase/vehicles.json", "r", encoding="utf-8") as f:
             try:
                 vehicles = json.load(f)
             except json.JSONDecodeError:
@@ -29,8 +39,8 @@ def new_vehicles():
 
     vehicles.setdefault(username, []).append(new_vehicle)
 
-    with open("vehicles.json", "w", encoding="utf-8") as f:
+    with open("DataBase/vehicles.json", "w", encoding="utf-8") as f:
         json.dump(vehicles, f, ensure_ascii=False, indent=4)
 
-    return "Salvataggio eseguito con successo!"
-    # return redirect(/driver)
+    # Ricorda: una volta creato il template che mostra le macchine del driver collegarsi a quello 
+    return redirect("/user_driver")

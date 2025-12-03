@@ -1,3 +1,9 @@
+# Folder of imagins
+licenses/
+
+# Created json file
+*.json
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
