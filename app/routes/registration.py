@@ -21,13 +21,19 @@ def save_driver():
     license = request.files.get('license')
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_pathdb = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_pathdb, exist_ok=True)
+
+    drivers_file = os.path.join(db_pathdb, "drivers.json")
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
     db_path = os.path.join(BASE_DIR, "licenses")
     os.makedirs(db_path, exist_ok=True)
 
     # salvo la patete dentro la cartella "licenses"
     # il nome del file è nel formato username_numeroPatente
     if license.content_type.startswith('image/'):
-        filepath = os.path.join("licenses", f"{username}_{nrLicense}")
+        filepath = os.path.join(db_path, f"{username}_{nrLicense}")
         license.save(filepath)
 
     new_driver = {
@@ -42,7 +48,7 @@ def save_driver():
     try:
         # "r" --> sola lettura
         # "w" --> se non esiste lo crea da zero
-        with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
+        with open(drivers_file, "r", encoding="utf-8") as f:
             try:
                 drivers = json.load(f)
             except json.JSONDecodeError:
@@ -52,7 +58,7 @@ def save_driver():
 
     drivers.append(new_driver)
 
-    with open("DataBase/drivers.json", "w", encoding="utf-8") as f:
+    with open(drivers_file, "w", encoding="utf-8") as f:
         json.dump(drivers, f, ensure_ascii=False, indent=4)
 
     session["username"] = username
@@ -79,8 +85,10 @@ def save_passenger():
     db_path = os.path.join(BASE_DIR, "DataBase")
     os.makedirs(db_path, exist_ok=True)
 
+    passengers_file = os.path.join(db_path, "passengers.json")
+
     try:
-        with open("DataBase/passengers.json", "r", encoding="utf-8") as f:
+        with open(passengers_file, "r", encoding="utf-8") as f:
             try:
                 passengers = json.load(f)
             except json.JSONDecodeError:
@@ -90,7 +98,7 @@ def save_passenger():
 
     passengers.append(new_passenger)
 
-    with open("DataBase/passengers.json", "w", encoding="utf-8") as f:
+    with open(passengers_file, "w", encoding="utf-8") as f:
         json.dump(passengers, f, ensure_ascii=False, indent=4)
 
     return "Salvataggio eseguito con successo!"
