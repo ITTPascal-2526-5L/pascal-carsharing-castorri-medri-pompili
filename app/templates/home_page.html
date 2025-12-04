@@ -37,14 +37,41 @@
                   <li><a class="dropdown-item" href="{{ url_for('tables.schools_detail') }}">Schools</a></li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a class="nav-link text-white" href="{{ url_for('esplora.esplora_drivers') }}">Esplora Drivers</a>
+              </li>
             </ul>
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
-              <li class="nav-item">
-                <a class="nav-link text-white" href="{{ url_for('login.new_login') }}">Log In</a>
-              </li>
-              <li class="nav-item ms-3">
-                <a class="nav-link text-white" href="{{ url_for('registration.registration_passenger') }}">Sign In</a>
-              </li>
+              {% if session.get('username') %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle text-white" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="bi bi-person-circle"></i> {{ session.get('username') }}
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                    <li><a class="dropdown-item" href="{{ url_for('user.profile') }}">Il mio profilo</a></li>
+                    <li><a class="dropdown-item" href="{{ url_for('user.settings') }}">Impostazioni</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    {% if not session.get('is_driver') %}
+                      <li><a class="dropdown-item" href="{{ url_for('user.become_driver_page') }}">Diventa Driver</a></li>
+                    {% else %}
+                      <li><a class="dropdown-item" href="/add_vehicles">I miei veicoli</a></li>
+                    {% endif %}
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                      <form method="POST" action="{{ url_for('user.logout') }}" style="display: inline;">
+                        <button type="submit" class="dropdown-item text-danger">Logout</button>
+                      </form>
+                    </li>
+                  </ul>
+                </li>
+              {% else %}
+                <li class="nav-item">
+                  <a class="nav-link text-white" href="{{ url_for('login.new_login') }}">Log In</a>
+                </li>
+                <li class="nav-item ms-3">
+                  <a class="nav-link text-white" href="{{ url_for('registration.registration') }}">Sign In</a>
+                </li>
+              {% endif %}
             </ul>
           </div>
         </div>

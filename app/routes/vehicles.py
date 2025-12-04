@@ -42,5 +42,5 @@ def new_vehicles():
     with open("DataBase/vehicles.json", "w", encoding="utf-8") as f:
         json.dump(vehicles, f, ensure_ascii=False, indent=4)
 
-    # Ricorda: una volta creato il template che mostra le macchine del driver collegarsi a quello 
-    return redirect("/user_driver")
+    # Dopo aver salvato il veicolo, torniamo al dashboard utente
+    return redirect("/user_dashboard")
