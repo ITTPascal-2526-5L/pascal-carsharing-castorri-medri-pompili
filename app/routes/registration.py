@@ -24,6 +24,8 @@ def save_user():
     email = request.form['email']
     name = request.form.get('name', '').strip()
     surname = request.form.get('surname', '').strip()
+
+    # da aggiungere la crazione della cartella e dei file...guarda nel branch luca
     
     # Validazioni
     if "@" not in email:
