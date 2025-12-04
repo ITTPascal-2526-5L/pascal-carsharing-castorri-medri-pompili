@@ -22,21 +22,27 @@ def save_user():
     password = request.form['password']
     password_confirm = request.form.get('password_confirm', '')
     email = request.form['email']
-    name = request.form.get('name', '').strip()
-    surname = request.form.get('surname', '').strip()
-    
-    # Validazioni
-    if "@" not in email:
-        return render_template("signin/signin_user.html", errore="Email non valida")
-    if len(password) < 8:
-        return render_template("signin/signin_user.html", errore="Password troppo corta, deve avere almeno 8 caratteri")
-    if password != password_confirm:
-        return render_template("signin/signin_user.html", errore="Le password non corrispondono")
-    if not name or not surname:
-        return render_template("signin/signin_user.html", errore="Nome e cognome richiesti")
-    
-    # Nuovo utente: passenger di default
-    new_user = {
+    nrTel = request.form['nrTel']
+    nrLicense = request.form['nrLicense']
+    license = request.files.get('license')
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_pathdb = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_pathdb, exist_ok=True)
+
+    drivers_file = os.path.join(db_pathdb, "drivers.json")
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "licenses")
+    os.makedirs(db_path, exist_ok=True)
+
+    # salvo la patete dentro la cartella "licenses"
+    # il nome del file è nel formato username_numeroPatente
+    if license.content_type.startswith('image/'):
+        filepath = os.path.join(db_path, f"{username}_{nrLicense}")
+        license.save(filepath)
+
+    new_driver = {
         "username": username, 
         "password": password, 
         "email": email,
@@ -49,7 +55,9 @@ def save_user():
     }
 
     try:
-        with open("DataBase/utenti.json", "r", encoding="utf-8") as f:
+        # "r" --> sola lettura
+        # "w" --> se non esiste lo crea da zero
+        with open(drivers_file, "r", encoding="utf-8") as f:
             try:
                 utenti = json.load(f)
             except json.JSONDecodeError:
@@ -64,8 +72,8 @@ def save_user():
 
     utenti.append(new_user)
 
-    with open("DataBase/utenti.json", "w", encoding="utf-8") as f:
-        json.dump(utenti, f, ensure_ascii=False, indent=4)
+    with open(drivers_file, "w", encoding="utf-8") as f:
+        json.dump(drivers, f, ensure_ascii=False, indent=4)
 
     session["username"] = username
     session["is_driver"] = False
@@ -84,45 +92,36 @@ def registration_driver():
         return redirect("/login")
     return render_template("signin/signin_driver.html")
 
-@registration_bp.route("/save_driver", methods=["POST"])
-def save_driver():
-    if "username" not in session:
-        return redirect("/login")
-    
-    username = session["username"]
-    nrTel = request.form.get('nrTel', '')
-    nrLicense = request.form.get('nrLicense', '')
-    license_file = request.files.get('license')
-    
-    # Validazioni
-    if len(nrTel) != 10:
-        return render_template("signin/signin_driver.html", errore="Numero di telefono non valido (10 cifre)")
-    if len(nrLicense) != 10:
-        return render_template("signin/signin_driver.html", errore="Numero di patente non valido (10 caratteri)")
-    
-    filepath = ""
-    if license_file and license_file.content_type.startswith('image/'):
-        os.makedirs("app/routes/licenses", exist_ok=True)
-        filepath = f"app/routes/licenses/{username}_{nrLicense}"
-        license_file.save(filepath)
-    
-    # Carica utenti e aggiorna
+@registration_bp.route("/save_passenger", methods=["POST"])
+def save_passenger():
+    username = request.form['username']
+    password = request.form['password']
+    email = request.form['email']
+
+    new_passenger = {
+        "username": username, 
+        "password": password, 
+        "email": email
+    }
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_path, exist_ok=True)
+
+    passengers_file = os.path.join(db_path, "passengers.json")
+
     try:
-        with open("DataBase/utenti.json", "r", encoding="utf-8") as f:
-            utenti = json.load(f)
+        with open(passengers_file, "r", encoding="utf-8") as f:
+            try:
+                passengers = json.load(f)
+            except json.JSONDecodeError:
+                passengers = []
     except:
-        utenti = []
-    
-    # Trova e aggiorna l'utente
-    for utente in utenti:
-        if utente["username"] == username:
-            utente["driver"] = True
-            utente["nrTel"] = nrTel
-            utente["nrLicense"] = nrLicense
-            utente["license"] = filepath
-            break
-    
-    with open("DataBase/utenti.json", "w", encoding="utf-8") as f:
-        json.dump(utenti, f, ensure_ascii=False, indent=4)
-    
-    return redirect("/user_dashboard")
+        passengers = []
+
+    passengers.append(new_passenger)
+
+    with open(passengers_file, "w", encoding="utf-8") as f:
+        json.dump(passengers, f, ensure_ascii=False, indent=4)
+
+    return "Salvataggio eseguito con successo!"

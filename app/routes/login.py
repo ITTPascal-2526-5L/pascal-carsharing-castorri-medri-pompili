@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, session, flash
 import json
+import os
 
 login_bp = Blueprint("login", __name__)
 
@@ -12,9 +13,17 @@ def check_login():
     username = request.form['username']
     password = request.form['password']
 
+    checkin = False
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_pathdb = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_pathdb, exist_ok=True)
+
+    drivers_file = os.path.join(db_pathdb, "drivers.json")
+
     try:
-        with open("DataBase/utenti.json", "r", encoding="utf-8") as f:
-            utenti = json.load(f)
+        with open(drivers_file, "r", encoding="utf-8") as f:
+            drivers = json.load(f)
 
             for utente in utenti:
                 if (utente["username"] == username or utente["email"] == username) and utente["password"] == password:
