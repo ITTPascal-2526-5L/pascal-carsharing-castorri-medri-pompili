@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, redirect, request, session
 import json
+import os
 
 # Per ogni endpoint metto un nome diverso che lo identifica.
 registration_bp = Blueprint("registration", __name__)
@@ -16,17 +17,31 @@ def save_driver():
     password = request.form['password']
     email = request.form['email']
     nrTel = request.form['nrTel']
-    nrPatente = request.form['nrPatente']
+    nrLicense = request.form['nrLicense']
+    license = request.files.get('license')
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "licenses")
+    os.makedirs(db_path, exist_ok=True)
+
+    # salvo la patete dentro la cartella "licenses"
+    # il nome del file è nel formato username_numeroPatente
+    if license.content_type.startswith('image/'):
+        filepath = os.path.join("licenses", f"{username}_{nrLicense}")
+        license.save(filepath)
 
     new_driver = {
         "username": username, 
         "password": password, 
         "email": email, 
-        "nrTel": nrTel, 
-        "nrPatente": nrPatente
+        "nrTel": nrTel,
+        "nrLicense": nrLicense,
+        "license": filepath
     }
 
     try:
+        # "r" --> sola lettura
+        # "w" --> se non esiste lo crea da zero
         with open("DataBase/drivers.json", "r", encoding="utf-8") as f:
             try:
                 drivers = json.load(f)
@@ -59,6 +74,10 @@ def save_passenger():
         "password": password, 
         "email": email
     }
+
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "DataBase")
+    os.makedirs(db_path, exist_ok=True)
 
     try:
         with open("DataBase/passengers.json", "r", encoding="utf-8") as f:

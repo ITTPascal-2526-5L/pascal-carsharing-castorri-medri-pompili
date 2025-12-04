@@ -9,6 +9,7 @@ from .config import Config
 def create_app():
     app = Flask(__name__)
     app.config.from_object(Config) # Config: è una clsse "nostra", per indicare in quale ambiente stiamo lavorando (sviluppo interno azienda)
+    app.secret_key = 'SOME KEY'
 
     # Ho importato tutti i blueprints che ho registrato all'interno del /routes/__init__.py
     # ogni blueprints, ovvero progetto, corrisponde ad una relazione simili 1 a 1 con le funzionalità del software che sto realizzando
