@@ -1,0 +1,105 @@
+{% extends "base_page/base_user.html" %}
+
+{% block title %}Profilo - PascalCarSharing{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">
+                    <i class="bi bi-person"></i> Il mio profilo
+                </h4>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Nome:</label>
+                        <p class="form-control-plaintext">{{ utente.name or 'Non specificato' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Cognome:</label>
+                        <p class="form-control-plaintext">{{ utente.surname or 'Non specificato' }}</p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Username:</label>
+                        <p class="form-control-plaintext">{{ utente.username }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Email:</label>
+                        <p class="form-control-plaintext">{{ utente.email }}</p>
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Telefono:</label>
+                        <p class="form-control-plaintext">{{ utente.nrTel or 'Non specificato' }}</p>
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Stato Account:</label>
+                        <p class="form-control-plaintext">
+                            {% if utente.driver %}
+                                <span class="badge bg-success">Driver</span>
+                            {% else %}
+                                <span class="badge bg-secondary">Passeggero</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+
+                {% if utente.driver %}
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-bold">Numero Patente:</label>
+                        <p class="form-control-plaintext">{{ utente.nrLicense or 'Non specificato' }}</p>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="row mt-4">
+                    <div class="col-md-12">
+                        <a href="/user_dashboard" class="btn btn-secondary">
+                            <i class="bi bi-arrow-left"></i> Torna al Dashboard
+                        </a>
+                        <a href="/settings" class="btn btn-primary">
+                            <i class="bi bi-pencil"></i> Modifica Profilo
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">Informazioni Account</h5>
+            </div>
+            <div class="card-body">
+                <p><strong>Tipo Account:</strong></p>
+                <p>
+                    {% if utente.driver %}
+                        Sei un Driver e Passeggero
+                    {% else %}
+                        Sei un Passeggero
+                    {% endif %}
+                </p>
+
+                {% if not utente.driver %}
+                <a href="/become_driver_page" class="btn btn-success w-100 mt-3">
+                    <i class="bi bi-plus-circle"></i> Diventa Driver
+                </a>
+                {% else %}
+                <a href="/vehicles" class="btn btn-primary w-100 mt-3">
+                    <i class="bi bi-car-front"></i> I miei veicoli
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
