@@ -13,27 +13,25 @@ def check_login():
     username = request.form['username']
     password = request.form['password']
 
-    checkin = False
-
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_pathdb = os.path.join(BASE_DIR, "DataBase")
+    db_pathdb = os.path.join(BASE_DIR, "All_User")
     os.makedirs(db_pathdb, exist_ok=True)
 
-    drivers_file = os.path.join(db_pathdb, "drivers.json")
+    users_file = os.path.join(db_pathdb, "users.json")
 
     try:
-        with open(drivers_file, "r", encoding="utf-8") as f:
-            drivers = json.load(f)
+        with open(users_file, "r", encoding="utf-8") as f:
+            users = json.load(f)
 
-            for utente in utenti:
-                if (utente["username"] == username or utente["email"] == username) and utente["password"] == password:
-                    session["username"] = utente["username"]
-                    session["is_driver"] = utente.get("driver", False)
+            for user in users:
+                if (user["username"] == username or user["email"] == username) and user["password"] == password:
+                    session["username"] = user["username"]
+                    session["is_driver"] = user.get("driver", False)
                     return redirect("/user_dashboard")
             
             flash("Credenziali errate", "danger")
             return render_template("login/login.html")
-    except Exception as e:
+    except:
         flash("Errore nel login", "danger")
         return render_template("login/login.html")
 
