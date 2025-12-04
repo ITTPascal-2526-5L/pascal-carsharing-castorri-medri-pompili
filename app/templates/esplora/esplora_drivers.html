@@ -1,0 +1,48 @@
+{% extends "esplora/base_page.html" %}
+
+{% block maincontent %}
+<div class="container pt-5 d-flex justify-content-center">
+  <div class="card no-hover col-12 col-lg-10 col-xl-8">
+    <div class="card-header text-white">
+      <div class="d-flex justify-content-between align-items-center w-100">
+        <h3 class="card-title mb-0" style="color: #6a1b9a;">Drivers Details</h3>
+      </div>
+    </div>
+    <div class="card-body">
+      {% if drivers %}
+          <div class="mb-3 d-flex gap-2">
+            <input type="text" id="searchInput" class="form-control" placeholder="Cerca..." autofocus>
+            <select id="filterType" class="form-select" style="width: auto;">
+              <option value="name">Cerca per Nome e Cognome</option>
+              <option value="username">Cerca per Username</option>
+            </select>
+          </div>
+          <div class="d-flex flex-wrap gap-3">
+          {% for driver in drivers %}
+            <div class="card driver-card" style="width: 18rem;" data-username="{{ driver.username.lower() }}" data-name="{{ (driver.name|string + ' ' + driver.surname|string).lower() }}">
+              <img src="{{ url_for('static', filename='img/foto_profilo.avif') }}" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">{{ driver.name }} {{ driver.surname }}</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{ driver.username }}</li>
+                <li class="list-group-item">{{ driver.email }}</li>
+                <li class="list-group-item">{{ driver.nrTel }}</li>
+                <li class="list-group-item">Patente: {{ driver.nrLicense }}</li>
+              </ul>
+              <div class="card-body">
+                <a href="#" class="card-link">Vedi Profilo</a>
+              </div>
+            </div>
+          {% endfor %}
+          </div>
+      {% else %}
+      <div class="alert alert-warning text-center">{{ message }}</div>
+      {% endif %}
+      <div class="text-end mt-3">
+        <button class="btn btn-secondary" onclick="window.history.back()">Back</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock maincontent %}
