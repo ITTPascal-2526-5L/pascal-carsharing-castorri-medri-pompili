@@ -14,7 +14,7 @@ def check_login():
     password = request.form['password']
 
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-    db_pathdb = os.path.join(BASE_DIR, "All_User")
+    db_pathdb = os.path.join(BASE_DIR, "All_Users")
     os.makedirs(db_pathdb, exist_ok=True)
 
     users_file = os.path.join(db_pathdb, "users.json")

@@ -18,15 +18,19 @@ def registration_passenger():
 
 @registration_bp.route("/save_user", methods=["POST"])
 def save_user():
+    name = request.form.get('name', '').strip()
+    surname = request.form.get('surname', '').strip()
     username = request.form['username']
     password = request.form['password']
     password_confirm = request.form.get('password_confirm', '')
     email = request.form['email']
-    name = request.form.get('name', '').strip()
-    surname = request.form.get('surname', '').strip()
 
-    # da aggiungere la crazione della cartella e dei file...guarda nel branch luca
-    
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    db_path = os.path.join(BASE_DIR, "All_Users")
+    os.makedirs(db_path, exist_ok=True)
+
+    users_file = os.path.join(db_path, "users.json")
+
     # Validazioni
     if "@" not in email:
         return render_template("signin/signin_user.html", errore="Email non valida")
@@ -53,7 +57,7 @@ def save_user():
     try:
         # "r" --> sola lettura
         # "w" --> se non esiste lo crea da zero
-        with open(drivers_file, "r", encoding="utf-8") as f:
+        with open(users_file, "r", encoding="utf-8") as f:
             try:
                 utenti = json.load(f)
             except json.JSONDecodeError:
@@ -68,8 +72,8 @@ def save_user():
 
     utenti.append(new_user)
 
-    with open(drivers_file, "w", encoding="utf-8") as f:
-        json.dump(drivers, f, ensure_ascii=False, indent=4)
+    with open(users_file, "w", encoding="utf-8") as f:
+        json.dump(new_user, f, ensure_ascii=False, indent=4)
 
     session["username"] = username
     session["is_driver"] = False
@@ -112,7 +116,7 @@ def save_driver():
     
     # Carica utenti e aggiorna
     try:
-        with open("DataBase/utenti.json", "r", encoding="utf-8") as f:
+        with open("All_Users/users.json", "r", encoding="utf-8") as f:
             utenti = json.load(f)
     except:
         utenti = []
@@ -126,7 +130,7 @@ def save_driver():
             utente["license"] = filepath
             break
     
-    with open("DataBase/utenti.json", "w", encoding="utf-8") as f:
+    with open("All_Users/users.json", "w", encoding="utf-8") as f:
         json.dump(utenti, f, ensure_ascii=False, indent=4)
     
     return redirect("/user_dashboard")
